@@ -6,12 +6,14 @@ Usage example:
 
 ```
 ▶ cat domains.txt | waybackurls > urls
+
+▶ cat domains.txt | waybackurls -oldest 20190101 > urls
 ```
 
 Install:
 
 ```
-▶ go get github.com/tomnomnom/waybackurls
+▶ Check release page
 ```
 
 ## Credit
