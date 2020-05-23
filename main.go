@@ -21,6 +21,10 @@ func main() {
 	var dates bool
 	flag.BoolVar(&dates, "dates", false, "show date of fetch in the first column")
 
+	var startdate string
+	flag.StringVar(&startdate, "oldest", "20060102", "Oldest time to get from, YYYYMMDD format")
+
+	startdate = fmt.Sprintf("%s000000", startdate)
 	var noSubs bool
 	flag.BoolVar(&noSubs, "no-subs", false, "don't include subdomains of the target domain")
 
@@ -99,9 +103,12 @@ func main() {
 				continue
 			}
 			seen[w.url] = true
-
+			
+			if w.date<(startdate) {
+				continue
+			}
+			
 			if dates {
-
 				d, err := time.Parse("20060102150405", w.date)
 				if err != nil {
 					fmt.Fprintf(os.Stderr, "failed to parse date [%s] for URL [%s]\n", w.date, w.url)
